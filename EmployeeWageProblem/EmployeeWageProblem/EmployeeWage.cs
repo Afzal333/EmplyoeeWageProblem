@@ -6,14 +6,26 @@ namespace EmployeeWageProblem
 {
     public class EmployeeWage
     {
+        const int Wage_Per_Hr = 20, Full_Day_Hr = 8, Is_Present = 0, Is_Full_Time = 1;
+        Random random = new Random();
         public void Attendance()
         {
-            Random random = new Random();
             int empCheck = random.Next(0, 2);
-            if (empCheck == 0)
+            if (empCheck == Is_Present)
                 Console.WriteLine("Emplyoee is Present");
             else
                 Console.WriteLine("Employee is Absent");
+        }
+        public void EmpWage()
+        {
+            int dailyEmpWage = 0, empHrs = 0;
+            int empCheck = random.Next(0, 2);
+            if (empCheck == Is_Full_Time)
+                empHrs = Full_Day_Hr;
+            else
+                empHrs = 0;
+            dailyEmpWage = Wage_Per_Hr * empHrs;
+            Console.WriteLine("Daily Emp Wage " + dailyEmpWage);
         }
 
     }
