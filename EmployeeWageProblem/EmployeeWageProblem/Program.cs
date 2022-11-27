@@ -6,11 +6,13 @@ namespace EmployeeWageProblem
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to Employee Wage Problem Statement");
-            EmployeeWage employeeWage = new EmployeeWage();
-            employeeWage.Attendance();
-            employeeWage.EmpWage("DMart",20,2,10);
-            employeeWage.EmpWage("Reliance", 10, 4, 20);
+            EmployeeWage Dmart = new EmployeeWage("Dmart", 20, 2, 10);
+            EmployeeWage Reliance = new EmployeeWage("Reliance", 20, 2, 10);
+            Dmart.EmpWage();
+            Console.WriteLine(Dmart.ToString());
+            Reliance.EmpWage();
+            Console.WriteLine(Reliance.ToString());
+
         }
     }
 }
