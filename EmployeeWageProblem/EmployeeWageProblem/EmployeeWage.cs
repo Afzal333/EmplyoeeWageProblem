@@ -7,7 +7,7 @@ namespace EmployeeWageProblem
     public class EmployeeWage
     {
         const int Wage_Per_Hr = 20, Full_Day_Hr = 8, Is_Present = 0, 
-            Is_Full_Time = 1,Is_Part_Time=2, Part_Time_Hr =4,Total_Working_Days = 20;
+            Is_Full_Time = 1,Is_Part_Time=2, Part_Time_Hr =4,Total_Working_Days = 20,Max_Hrs_In_Month = 10, Num_Of_Working_Days = 2;
         Random random = new Random();
         public void Attendance()
         {
@@ -19,9 +19,10 @@ namespace EmployeeWageProblem
         }
         public void EmpWage()
         {
-            int TotalEmpWage = 0, empHrs = 0;
-            for (int i = 0; i < Total_Working_Days && empHrs < 100; i++)
+            int totalEmpHrs = 0, empHrs = 0,totalWorkingDays =0;
+            while (totalEmpHrs <=Max_Hrs_In_Month && totalWorkingDays < Num_Of_Working_Days)
             {
+                totalWorkingDays++;
                 int empCheck = random.Next(0, 3);
                 switch (empCheck)
                 {
@@ -35,9 +36,11 @@ namespace EmployeeWageProblem
                         empHrs += 0;
                         break;
                 }
+                totalEmpHrs += empHrs;
+                Console.WriteLine("Day#:"+totalWorkingDays +" Emp Hrs : "+ empHrs);
             }
-            TotalEmpWage = Wage_Per_Hr * empHrs;
-            Console.WriteLine("Total Emp Wage " + TotalEmpWage);
+            int totalEmpWage = Wage_Per_Hr * totalEmpHrs;
+            Console.WriteLine("Total Emp Wage " + totalEmpWage);
         }
 
     }
