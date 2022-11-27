@@ -17,10 +17,10 @@ namespace EmployeeWageProblem
             else
                 Console.WriteLine("Employee is Absent");
         }
-        public void EmpWage()
+        public void EmpWage( string company, int empRatePerHour,int numofWorkingDays,int maxHoursPerMonth)
         {
             int totalEmpHrs = 0, empHrs = 0,totalWorkingDays =0;
-            while (totalEmpHrs <=Max_Hrs_In_Month && totalWorkingDays < Num_Of_Working_Days)
+            while (totalEmpHrs <= maxHoursPerMonth && totalWorkingDays < numofWorkingDays)
             {
                 totalWorkingDays++;
                 int empCheck = random.Next(0, 3);
@@ -39,8 +39,8 @@ namespace EmployeeWageProblem
                 totalEmpHrs += empHrs;
                 Console.WriteLine("Day#:"+totalWorkingDays +" Emp Hrs : "+ empHrs);
             }
-            int totalEmpWage = Wage_Per_Hr * totalEmpHrs;
-            Console.WriteLine("Total Emp Wage " + totalEmpWage);
+            int totalEmpWage = empRatePerHour * totalEmpHrs;
+            Console.WriteLine("Total Emp Wage for Company : " + company +" is: "+ totalEmpWage);
         }
 
     }
