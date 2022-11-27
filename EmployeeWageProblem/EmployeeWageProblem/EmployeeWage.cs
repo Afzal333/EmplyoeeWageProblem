@@ -6,16 +6,23 @@ namespace EmployeeWageProblem
 {
     public class EmployeeWage
     {
-        const int Is_Present = 0,Is_Full_Time = 1,Is_Part_Time=2;
+        public const int Is_Present = 0,Is_Full_Time = 1,Is_Part_Time=2;
+
+        private int numofComapny = 0;
+        private CompanyEmpWage[] companyEmpWagesArray;
+
         Random random = new Random();
 
-        private string company;
-        private int empRatePerHour;
-        private int numofWorkingDays;
-        private int maxHoursPerMonth;
-        private int totalEmpWage;
-      
+        public EmployeeWage()
+        {
+            this.companyEmpWagesArray = new CompanyEmpWage[5];
+        }
 
+        public void addCompanyWage(string company, int empRatePerHour, int numofWorkingDays, int maxHoursPerMonth)
+        {
+            companyEmpWagesArray[this.numofComapny] = new CompanyEmpWage(company, empRatePerHour, numofWorkingDays, maxHoursPerMonth);
+            numofComapny++;
+        }
         public void Attendance()
         {
             int empCheck = random.Next(0, 2);
@@ -25,18 +32,20 @@ namespace EmployeeWageProblem
                 Console.WriteLine("Employee is Absent");
         }
 
-        public EmployeeWage(string company, int empRatePerHour, int numofWorkingDays, int maxHoursPerMonth)
+        public void computeEmpWage()
         {
-            this.company = company;
-            this.empRatePerHour = empRatePerHour;
-            this.numofWorkingDays = numofWorkingDays;
-            this.maxHoursPerMonth = maxHoursPerMonth;
-
+            for(int i= 0; i< numofComapny; i++)
+            {
+                companyEmpWagesArray[i].setTotalEmpWage(this.EmpWage(this.companyEmpWagesArray[i]));
+                Console.WriteLine(this.companyEmpWagesArray[i].toString());
+            }
         }
-        public void EmpWage()
+
+
+        private int EmpWage(CompanyEmpWage companyEmpWage)
         {
-            int totalEmpHrs = 0, empHrs = 0,totalWorkingDays =0;
-            while (totalEmpHrs <= this.maxHoursPerMonth && totalWorkingDays < this.numofWorkingDays)
+            int totalEmpHrs = 0, empHrs = 0, totalWorkingDays = 0;
+            while (totalEmpHrs <= companyEmpWage.maxHoursPerMonth && totalWorkingDays < companyEmpWage.numofWorkingDays)
             {
                 totalWorkingDays++;
                 int empCheck = random.Next(0, 3);
@@ -53,16 +62,12 @@ namespace EmployeeWageProblem
                         break;
                 }
                 totalEmpHrs += empHrs;
-                Console.WriteLine("Day#:"+totalWorkingDays +" Emp Hrs : "+ empHrs);
+                Console.WriteLine("Day#:" + totalWorkingDays + " Emp Hrs : " + empHrs);
             }
-            int totalEmpWage = this.empRatePerHour * totalEmpHrs;
-            Console.WriteLine("Total Emp Wage for Company : " + company +" is: "+ totalEmpWage);
+            return totalEmpHrs * companyEmpWage.empRatePerHour;
         }
 
-        public string toString()
-        {
-            return ("total Emp Wage for company" + this.company + " is: " + this.totalEmpWage);
-        }
+       
 
     }
 }
